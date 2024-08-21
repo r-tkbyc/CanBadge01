@@ -45,29 +45,21 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
     </style>
   </head>
   <body>
-    <div style="color: #f00;">Ver1.2.5</div>
-    <a-scene mindar-image="filterMinCF:0.001; filterBeta: 0.01; imageTargetSrc: ./assets/target/targets.mind; showStats: false; uiScanning: #example-scanning-overlay;"
-             embedded="" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false"
-             inspector="" keyboard-shortcuts="" screenshot="">
+    <a-scene mindar-image="filterMinCF:0.001; filterBeta: 0.01; imageTargetSrc: ./assets/target/targets.mind;" 
+             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-        <a-asset-item id="avatarModel" src="assets/blender/canbadge01-a.glb"></a-asset-item>
+        <a-asset-item id="avatarModel" src="./assets/blender/canbadge01-a.glb"></a-asset-item>
       </a-assets>
 
-      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
-                raycaster="far: 10000; objects: .clickable" camera="" rotation="" wasd-controls="">
-      </a-camera>
-
-      <a-entity mytarget id="" mindar-image-target="targetIndex: 0">
-        <a-entity visible="false" id="my-avatar" position="0 0 -0.01">
-          <a-ring radius-inner="0.525" radius-outer="2" hider-material></a-ring>
-          <a-gltf-model id="showAvatarModel" position="0 0.1 -0.1" scale="0.635 0.635 0.635" src="#avatarModel" animation-mixer>
-        </a-entity>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane src="#card" position="0 0 0" height="1" width="0.552" rotation="0 0 90"></a-plane>
+        <a-gltf-model id="item" rotation="90 0 0" position="0 0.25 0.1" scale="0.05 0.05 0.05" src="#avatarModel" animation-mixer></a-gltf-model>
+        <a-video src="#video" width="16" height="9" position="0 0 0.01" scale="0.065 0.065 0.065"></a-video>
       </a-entity>
 
-      <canvas class="a-canvas" data-aframe-canvas="true" data-engine="three.js r147" width="54" height="960"></canvas>
-      <div class="a-loader-title" style="display: none;"></div>
-      <a-entity light="" position="" data-aframe-default-light="" aframe-injected=""></a-entity>
-      <a-entity light="" position="" data-aframe-default-light="" aframe-injected=""></a-entity>
+      <a-text class="color-red">Ver1.1.2</a-text>
     </a-scene>
 
     <button id="btn-start" class="btn">START</button>
