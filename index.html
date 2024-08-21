@@ -19,61 +19,6 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
         }
       });
     </script>
-    <style>
-      .color-red {
-        color: #FF0000;
-      }
-      .btn {
-        position: absolute;
-        bottom: 1.2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #fff;
-        font-size: 1.2rem;
-        font-weight: 800;
-        letter-spacing: 0.1rem;
-        color: #444;
-        opacity: 0.85;
-        padding: 0.75rem 1.25rem;
-        border: solid 0.17rem #444;
-        border-radius: 0.55rem;
-      }
-      .btn-restart {
-        position: absolute;
-        bottom: 1.2rem;
-        left: 10%;
-        transform: translateX(-50%);
-        background-color: #fff;
-        font-size: 0.65rem;
-        color: #444;
-        opacity: 0.5;
-        padding: 0.5rem 0.6rem;
-        border: solid 0.17rem #444;
-        border-radius: 0.55rem;
-      }
-    </style>
-  </head>
-  <body>
-    <a-scene mindar-image="filterMinCF:0.001; filterBeta: 0.01; imageTargetSrc: ./assets/target/targets.mind;" 
-             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <a-asset-item id="avatarModel" src="./assets/blender/canbadge01-a.glb"></a-asset-item>
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-ring radius-inner="0.525" radius-outer="2" hider-material></a-ring>
-        <a-gltf-model id="item" position="0 0.1 -0.1" scale="0.635 0.635 0.635" src="#avatarModel" animation-mixer></a-gltf-model>
-      </a-entity>
-
-      <a-text class="color-red">Ver1.0.7</a-text>
-    </a-scene>
-
-    <button id="btn-start" class="btn">START</button>
-    <button id="btn-pause" class="btn" style="display: none;">PAUSE</button>
-    <button id="btn-restart" class="btn-restart">Restart</button>
 
     <script>
       let isPaused = false;
@@ -172,5 +117,61 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
         }
       });
     </script>
+
+    <style>
+      .color-red {
+        color: #FF0000;
+      }
+      .btn {
+        position: absolute;
+        bottom: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: 0.1rem;
+        color: #444;
+        opacity: 0.85;
+        padding: 0.75rem 1.25rem;
+        border: solid 0.17rem #444;
+        border-radius: 0.55rem;
+      }
+      .btn-restart {
+        position: absolute;
+        bottom: 1.2rem;
+        left: 10%;
+        transform: translateX(-50%);
+        background-color: #fff;
+        font-size: 0.65rem;
+        color: #444;
+        opacity: 0.5;
+        padding: 0.5rem 0.6rem;
+        border: solid 0.17rem #444;
+        border-radius: 0.55rem;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene mindar-image="filterMinCF:0.001; filterBeta: 0.01; imageTargetSrc: ./assets/target/targets.mind;" 
+             color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="avatarModel" src="./assets/blender/canbadge01-a.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-ring radius-inner="0.525" radius-outer="2" hider-material></a-ring>
+        <a-gltf-model id="item" position="0 0.1 -0.1" scale="0.635 0.635 0.635" src="#avatarModel" animation-mixer></a-gltf-model>
+      </a-entity>
+
+      <a-text class="color-red">Ver1.0.8</a-text>
+    </a-scene>
+
+    <button id="btn-start" class="btn">START</button>
+    <button id="btn-pause" class="btn" style="display: none;">PAUSE</button>
+    <button id="btn-restart" class="btn-restart">Restart</button>
   </body>
 </html>
