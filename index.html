@@ -25,6 +25,104 @@ WebARマーカー読み込み後、モーダルを表示
     });
   </script>
 
+  <script>
+    let isPaused = false;
+    const btnStart = document.getElementById('btn-start');
+    const btnPause = document.getElementById('btn-pause');
+    const btnRestart = document.getElementById('btn-restart');
+
+    btnStart.addEventListener('click', () => {
+      const model = document.querySelector('#item');
+      if (model) {
+        const animationMixer = model.components['animation-mixer'];
+        if (animationMixer) {
+          const actions = animationMixer.mixer._actions;
+          if (actions.length > 0) {
+            const action = actions[0];
+            if (isPaused) {
+              action.paused = false; // 一時停止を解除
+            } else {
+              action.play();
+            }
+            isPaused = false;
+          }
+        }
+      }
+      const video = document.querySelector('#video'); // 動画がある場合は再生
+      if (video) {
+        video.play();
+      }
+      btnStart.style.display = 'none';
+      btnPause.style.display = 'block';
+    });
+
+    btnPause.addEventListener('click', () => {
+      const model = document.querySelector('#item');
+      if (model) {
+        const animationMixer = model.components['animation-mixer'];
+        if (animationMixer) {
+          const actions = animationMixer.mixer._actions;
+          if (actions.length > 0) {
+            const action = actions[0];
+            action.paused = true; // 一時停止
+            isPaused = true;
+          }
+        }
+      }
+      const video = document.querySelector('#video'); // 動画がある場合は一時停止
+      if (video) {
+        video.pause();
+      }
+      btnPause.style.display = 'none';
+      btnStart.style.display = 'block';
+    });
+
+    btnRestart.addEventListener('click', () => {
+      const model = document.querySelector('#item');
+      if (model) {
+        const animationMixer = model.components['animation-mixer'];
+        if (animationMixer) {
+          const actions = animationMixer.mixer._actions;
+          if (actions.length > 0) {
+            const action = actions[0];
+            action.stop();
+            action.play();
+            isPaused = false;
+          }
+        }
+      }
+      const video = document.querySelector('#video'); // 動画がある場合は最初から再生
+      if (video) {
+        video.currentTime = 0;
+        video.play();
+      }
+      btnStart.style.display = 'none';
+      btnPause.style.display = 'block';
+    });
+
+    AFRAME.registerComponent('stop-animation-on-load', {
+      init: function () {
+        const el = this.el;
+        el.addEventListener('model-loaded', () => {
+          const model = el.getObject3D('mesh');
+          if (model && model.animations) {
+            const mixer = el.components['animation-mixer'].mixer;
+            mixer.stopAllAction();
+          }
+        });
+      }
+    });
+
+    document.querySelector('#item').setAttribute('stop-animation-on-load', '');
+
+    window.addEventListener('load', () => {
+      const video = document.querySelector('#video');
+      if (video) {
+        video.pause();
+      }
+    });
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -213,7 +311,7 @@ WebARマーカー読み込み後、モーダルを表示
 </head>
 
 <body>
-  <div style="color: #f00;">Ver1.0.5</div>
+  <div style="color: #f00;">Ver1.0.6</div>
 
   <div class="example-container">
     <div id="example-scanning-overlay" class="">
@@ -252,104 +350,6 @@ WebARマーカー読み込み後、モーダルを表示
     <button id="btn-start" class="btn">START</button>
     <button id="btn-pause" class="btn" style="display: none;">PAUSE</button>
     <button id="btn-restart" class="btn-restart">Restart</button>
-
-    <script>
-      let isPaused = false;
-      const btnStart = document.getElementById('btn-start');
-      const btnPause = document.getElementById('btn-pause');
-      const btnRestart = document.getElementById('btn-restart');
-  
-      btnStart.addEventListener('click', () => {
-        const model = document.querySelector('#item');
-        if (model) {
-          const animationMixer = model.components['animation-mixer'];
-          if (animationMixer) {
-            const actions = animationMixer.mixer._actions;
-            if (actions.length > 0) {
-              const action = actions[0];
-              if (isPaused) {
-                action.paused = false; // 一時停止を解除
-              } else {
-                action.play();
-              }
-              isPaused = false;
-            }
-          }
-        }
-        const video = document.querySelector('#video'); // 動画がある場合は再生
-        if (video) {
-          video.play();
-        }
-        btnStart.style.display = 'none';
-        btnPause.style.display = 'block';
-      });
-  
-      btnPause.addEventListener('click', () => {
-        const model = document.querySelector('#item');
-        if (model) {
-          const animationMixer = model.components['animation-mixer'];
-          if (animationMixer) {
-            const actions = animationMixer.mixer._actions;
-            if (actions.length > 0) {
-              const action = actions[0];
-              action.paused = true; // 一時停止
-              isPaused = true;
-            }
-          }
-        }
-        const video = document.querySelector('#video'); // 動画がある場合は一時停止
-        if (video) {
-          video.pause();
-        }
-        btnPause.style.display = 'none';
-        btnStart.style.display = 'block';
-      });
-  
-      btnRestart.addEventListener('click', () => {
-        const model = document.querySelector('#item');
-        if (model) {
-          const animationMixer = model.components['animation-mixer'];
-          if (animationMixer) {
-            const actions = animationMixer.mixer._actions;
-            if (actions.length > 0) {
-              const action = actions[0];
-              action.stop();
-              action.play();
-              isPaused = false;
-            }
-          }
-        }
-        const video = document.querySelector('#video'); // 動画がある場合は最初から再生
-        if (video) {
-          video.currentTime = 0;
-          video.play();
-        }
-        btnStart.style.display = 'none';
-        btnPause.style.display = 'block';
-      });
-  
-      AFRAME.registerComponent('stop-animation-on-load', {
-        init: function () {
-          const el = this.el;
-          el.addEventListener('model-loaded', () => {
-            const model = el.getObject3D('mesh');
-            if (model && model.animations) {
-              const mixer = el.components['animation-mixer'].mixer;
-              mixer.stopAllAction();
-            }
-          });
-        }
-      });
-  
-      document.querySelector('#item').setAttribute('stop-animation-on-load', '');
-  
-      window.addEventListener('load', () => {
-        const video = document.querySelector('#video');
-        if (video) {
-          video.pause();
-        }
-      });
-    </script>
   </div>
 
   <div class="mindar-ui-overlay mindar-ui-loading hidden">
