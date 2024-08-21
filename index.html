@@ -56,11 +56,11 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
       <a-entity mindar-image-target="targetIndex: 0">
         <a-entity visible="false" id="my-avatar" position="0 0 -0.01">
           <a-ring radius-inner="0.525" radius-outer="2" hider-material></a-ring>
-          <a-gltf-model id="item" position="0 0.1 -0.1" scale="0.635 0.635 0.635" src="#avatarModel" animation-mixer>
+          <a-gltf-model id="item" position="0 0.1 -0.1" scale="0.635 0.635 0.635" src="#avatarModel" animation-mixer></a-gltf-model>
         </a-entity>
       </a-entity>
 
-      <a-text class="color-red">Ver1.0.2</a-text>
+      <a-text class="color-red">Ver1.0.3</a-text>
     </a-scene>
 
     <button id="btn-start" class="btn">START</button>
@@ -90,7 +90,7 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
             }
           }
         }
-        const video = document.querySelector('#video'); // 動画がある場合は再生
+        //const video = document.querySelector('#video'); // 動画がある場合は再生
         if (video) {
           video.play();
         }
@@ -111,7 +111,7 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
             }
           }
         }
-        const video = document.querySelector('#video'); // 動画がある場合は一時停止
+        //const video = document.querySelector('#video'); // 動画がある場合は一時停止
         if (video) {
           video.pause();
         }
@@ -133,7 +133,7 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
             }
           }
         }
-        const video = document.querySelector('#video'); // 動画がある場合は最初から再生
+        //const video = document.querySelector('#video'); // 動画がある場合は最初から再生
         if (video) {
           video.currentTime = 0;
           video.play();
