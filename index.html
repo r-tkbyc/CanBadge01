@@ -10,6 +10,15 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+      AFRAME.registerComponent('hider-material', {
+        init: function () {
+          const material = this.el.getObject3D('mesh').material;
+          material.colorWrite = false;
+          console.log(material);
+        }
+      });
+    </script>
     <style>
       .color-red {
         color: #FF0000;
@@ -61,7 +70,7 @@ WebARマーカー読み込み後、最初の挙動は動画、gltfアニメー�
         </a-entity>
       </a-entity>
 
-      <a-text class="color-red">Ver1.0.5</a-text>
+      <a-text class="color-red">Ver1.0.6</a-text>
     </a-scene>
 
     <button id="btn-start" class="btn">START</button>
